@@ -1,8 +1,11 @@
 name: Hello CI
 
 on:
+  push:
+    branches-ignore:
+      - master
+      - develop
   pull_request:
-    types: [closed, opened, synchronize, reopened]
     branches:
       - master
       - develop
@@ -10,7 +13,7 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: self-hosted
+    runs-on: ubuntu-lastest
     strategy:
       matrix:
         otp: ['23.0']
