@@ -1,10 +1,10 @@
-name: Media Production Service CI
+name: Hello CI
 
 on:
   pull_request:
     types: [closed, opened, synchronize, reopened]
     branches:
-      - main
+      - master
       - develop
 
 jobs:
