@@ -61,12 +61,12 @@ jobs:
       if: github.event.pull_request.merged != true
       run: mix format --check-formatted
 
-    - name: Run test suite
-      if: github.event.pull_request.merged != true
-      run: |
-        mix ecto.create
-        mix ecto.migrate
-        mix test
+    # - name: Run test suite
+    #   if: github.event.pull_request.merged != true
+    #   run: |
+    #     mix ecto.create
+    #     mix ecto.migrate
+    #     mix test
 
     - name: Dispatch CD workflow
       if: |
