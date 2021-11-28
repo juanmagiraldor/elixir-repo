@@ -19,14 +19,6 @@ pre_erlang_clean_compile() {
    npm install $SILENCE
   "
 
-  status "Running phx.digest"
-  __sync_remote "
-   [ -f ~/.profile ] && source ~/.profile
-   set -e
-   cd '$BUILD_AT/apps/ui'
-   APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
-  "
-
   status "Running ecto.migrations"
   __sync_remote "
    [ -f ~/.profile ] && source ~/.profile
