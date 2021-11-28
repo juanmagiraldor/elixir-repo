@@ -1,4 +1,4 @@
-name: Podnation CD
+name: Hello CD
 
 on: workflow_dispatch
 

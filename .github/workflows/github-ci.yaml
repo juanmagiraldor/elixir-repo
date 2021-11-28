@@ -71,7 +71,7 @@ jobs:
     - name: Dispatch CD workflow
       if: |
         github.event.pull_request.merged == true &&
-        contains('refs/heads/master refs/heads/develop', github.ref)
+        contains('refs/heads/master', github.ref)
       uses: benc-uk/workflow-dispatch@v1
       with:
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
