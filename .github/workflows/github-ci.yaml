@@ -51,7 +51,7 @@ jobs:
         restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-
 
     - name: Install dependencies
-      if: steps.mix-cache.outputs.cache-hit != 'true'
+      if: steps.mix-cache.outputs.cache-hit != 'true' && github.event.pull_request.merged != true
       run: |
         mix local.rebar --force
         mix local.hex --force
