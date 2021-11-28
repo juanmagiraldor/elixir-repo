@@ -1,0 +1,58 @@
+APP="hello"
+
+BUILD_HOST="161.35.13.159"
+BUILD_USER="deploy"
+BUILD_AT="/home/deploy/podnation/builds"
+
+PRODUCTION_HOSTS="161.35.13.159"
+PRODUCTION_USER="deploy"
+DELIVER_TO="/home/deploy/podnation"
+
+RELEASE_STORE=$BUILD_USER@$BUILD_HOST:$DELIVER_TO/$APP/releases/
+
+pre_erlang_clean_compile() {
+  status "Installing NPM dependencies"
+  __sync_remote "
+   [ -f ~/.profile ] && source ~/.profile
+   set -e
+   cd '$BUILD_AT/apps/ui/assets'
+   npm install $SILENCE
+  "
+
+  status "Building static files"
+  __sync_remote "
+   [ -f ~/.profile ] && source ~/.profile
+   set -e
+   cd '$BUILD_AT/apps/ui'
+   mkdir -p priv/static
+   cd '$BUILD_AT/apps/ui/assets'
+   npm run deploy $SILENCE
+  "
+
+  status "Running phx.digest"
+  __sync_remote "
+   [ -f ~/.profile ] && source ~/.profile
+   set -e
+   cd '$BUILD_AT/apps/ui'
+   APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
+  "
+
+  status "Running ecto.migrations"
+  __sync_remote "
+   [ -f ~/.profile ] && source ~/.profile
+   set -e
+   cd '$BUILD_AT'
+   APP='$APP' MIX_ENV='$TARGET_MIX_ENV' POOL_SIZE=2 $MIX_CMD ecto.migrate $SILENCE
+  "
+}
+
+post_extract_release_archive() {
+  status "Removing start_erl.data"
+  __remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    if [ -f $DELIVER_TO/$APP/var/start_erl.data ]; then
+      rm $DELIVER_TO/$APP/var/start_erl.data
+    fi
+  "
+}
