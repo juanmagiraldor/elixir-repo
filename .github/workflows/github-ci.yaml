@@ -13,7 +13,7 @@ on:
 jobs:
   run_tests:
     name: Running tests...
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         otp: ['23.0']
@@ -67,3 +67,13 @@ jobs:
         mix ecto.create
         mix ecto.migrate
         mix test
+
+    - name: Dispatch CD workflow
+      if: |
+        github.event.pull_request.merged == true &&
+        contains('refs/heads/master refs/heads/develop', github.ref)
+      uses: benc-uk/workflow-dispatch@v1
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+        workflow: Podnation CD
+
