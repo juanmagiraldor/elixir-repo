@@ -49,18 +49,16 @@ jobs:
         restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-
 
     - name: Install dependencies
-      if: steps.mix-cache.outputs.cache-hit != 'true' && github.event.pull_request.merged != true
+      if: steps.mix-cache.outputs.cache-hit != 'true'
       run: |
         mix local.rebar --force
         mix local.hex --force
         mix deps.get
 
     - name: Check Formatting
-    - if: github.event.pull_request.merged != true
       run: mix format --check-formatted
 
     - name: Run test suite
-    - if: github.event.pull_request.merged != true
       run: |
         mix ecto.create
         mix ecto.migrate
@@ -73,5 +71,5 @@ jobs:
       uses: benc-uk/workflow-dispatch@v1
       with:
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        workflow: Hello CD
+        workflow: Podnation CD
 
