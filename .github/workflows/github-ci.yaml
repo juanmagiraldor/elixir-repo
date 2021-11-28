@@ -1,11 +1,7 @@
-name: Hello CI - test
-
+name: Hello CI
 on:
-  push:
-    branches-ignore:
-      - master
-      - develop
   pull_request:
+    types: [closed, opened, synchronize, reopened]
     branches:
       - master
       - develop
