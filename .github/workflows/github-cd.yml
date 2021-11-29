@@ -1,11 +1,6 @@
 name: Hello CD
 
-on:
-  pull_request:
-    types: [closed]
-    branches:
-      - master
-      - develop
+on: workflow_dispatch
 
 jobs:
   deploy:
