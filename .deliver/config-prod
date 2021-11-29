@@ -1,5 +1,8 @@
 APP="hello"
 
+APP='hello' MIX_ENV='$TARGET_MIX_ENV' POOL_SIZE=2 mix ecto.migrate
+
+
 BUILD_HOST="161.35.13.159"
 BUILD_USER="deploy"
 BUILD_AT="/home/deploy/hello/builds"
