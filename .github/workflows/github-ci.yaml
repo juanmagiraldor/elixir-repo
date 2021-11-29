@@ -67,9 +67,8 @@ jobs:
 
 jobs:
   start_cd:
-    if: |
-        github.event.pull_request.merged == true &&
-        contains('refs/heads/master', github.ref)
+    if: github.event.pull_request.merged == true && contains('refs/heads/master', github.ref)
+    steps:
     - name: Dispatch CD workflow
       uses: benc-uk/workflow-dispatch@v1
       with:
