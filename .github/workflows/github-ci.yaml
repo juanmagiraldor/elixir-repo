@@ -1,7 +1,7 @@
 name: Hello CI
 on:
   pull_request:
-    types: [closed, opened, synchronize, reopened]
+    types: [opened, synchronize, reopened]
     branches:
       - master
       - develop
@@ -67,13 +67,4 @@ jobs:
     #     mix ecto.create
     #     mix ecto.migrate
     #     mix test
-
-    - name: Dispatch CD workflow
-      if: |
-        github.event.pull_request.merged == true &&
-        contains('refs/heads/master', github.ref)
-      uses: benc-uk/workflow-dispatch@v1
-      with:
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}
-        workflow: Hello CD
 
