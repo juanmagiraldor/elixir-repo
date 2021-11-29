@@ -1,14 +1,8 @@
 APP="hello"
 
-APP='hello' MIX_ENV='$TARGET_MIX_ENV' POOL_SIZE=2 mix ecto.migrate
-
-
 BUILD_HOST="161.35.13.159"
 BUILD_USER="deploy"
 BUILD_AT="/home/deploy/hello/builds"
-
-PRODUCTION_HOSTS="161.35.13.159"
-PRODUCTION_USER="deploy"
 DELIVER_TO="/home/deploy/hello"
 
 RELEASE_STORE=$BUILD_USER@$BUILD_HOST:$DELIVER_TO/$APP/releases/
