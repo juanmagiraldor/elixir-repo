@@ -65,7 +65,6 @@ jobs:
         mix ecto.migrate
         mix test
 
-jobs:
   start_cd:
     if: github.event.pull_request.merged == true && contains('refs/heads/master', github.ref)
     steps:
