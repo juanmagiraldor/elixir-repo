@@ -1,6 +1,6 @@
 APP="hello"
 
-BUILD_HOST=$BUILD_HOST
+# BUILD_HOST=$BUILD_HOST
 BUILD_USER="deploy"
 BUILD_AT="/home/deploy/hello/builds"
 
