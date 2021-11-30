@@ -1,6 +1,10 @@
 APP="hello"
 
-BUILD_HOST="161.35.13.159"
+BUILD_HOST=__sync_remote "
+   [ -f ~/.profile ] && source ~/.profile
+   set -e
+   resolveip -s staging
+  "
 BUILD_USER="deploy"
 BUILD_AT="/home/deploy/hello/builds"
 
